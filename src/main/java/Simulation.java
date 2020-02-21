@@ -39,24 +39,50 @@ public class Simulation {
 
     }
 
-    private void printResults() {
+    private String printResults() {
         String header = String.format("***\nSimulation of %s dice tossed for %s times.\n***", numOfDie.toString(), numOfRolls.toString());
         LOGGER.info(header);
-
-        int possiblities = 1;
+        String result = "";
+        String rollResult = "";
+        int possibilities = 1;
 
         for(int i = low; i <= high; i++){
             Integer x = bin.getBin(i);
-            possiblities++;
+
+            if (possibilities <= 8) {
+
+                possibilities++;
+                result += possibilities + "  :";
+
+            }
+            else {
+                possibilities++;
+                result += possibilities + " :";
+
+
+            }
             int percent = (x*100) /numOfRolls;
             String star = "";
             for(int j = 1; j <= percent; j++) {
                 star += "*";
             }
-            String body = String.format("%s : %s : %s %s", possiblities, x.toString(), percent, star);
-            LOGGER.info(body);
-            System.out.println(body);
+
+
+
+//            String body = String.format("%s : %s : %s %s", possibilities, x.toString(), percent, star);
+//            LOGGER.info(body);
+//            System.out.println(body);
+//            if ( x < 100000){
+//                rollResult += x + "  " + "\n";
+//            }
+//            else {
+//                rollResult += x + " " + "\n";
+//            }
+            result += x + "\n";
         }
+        System.out.println(result);
+        return result;
+
     }
 
 
